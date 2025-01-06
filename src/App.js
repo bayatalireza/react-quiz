@@ -3,6 +3,9 @@ import "./App.css";
 import DateCounter from "./components/DateCounter";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Loader from "./components/Loader";
+import Error from "./components/Error";
+import StartScreen from "./components/StartScreen";
 
 const initialState = {
   questions: [],
@@ -24,6 +27,9 @@ function reducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const { questions, status} = state;
+
+
   useEffect(() => {
     fetch("http://localhost:3001/questions")
       .then((res) => res.json())
@@ -34,7 +40,12 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Main />
+     
+      <Main>
+        {status === "loading" && <Loader />}
+        {status === "error" && <Error />}
+        {status === "ready" && <StartScreen questions={questions} />}
+      </Main>
       <DateCounter />
     </div>
   );
