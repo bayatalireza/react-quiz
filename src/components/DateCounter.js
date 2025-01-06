@@ -3,13 +3,8 @@ import { useReducer } from "react";
 const initialState = { count: 0, step: 1 };
 
 function Reducer(state, action) {
-  console.log(state, action);
 
-  // if (action.type === "inc") return state + action.payload;
-  // if (action.type === "dec") return state - action.payload;
-  // if (action.type === "setStep") return action.payload;
-  // if (action.type === "setCount") return action.payload;
-  // if (action.type === "reset") return initialState;
+
   switch (action.type){
     case "inc":
       return{...state, count: state.count + state.step};
@@ -26,8 +21,6 @@ function Reducer(state, action) {
   }
 }
 export default function DateCounter() {
-  // const [step, setStep] = useState(1);
-  // const [count, setCount] = useState(1);
   const [state, dispatch] = useReducer(Reducer, initialState);
   const { step, count } = state;
 
