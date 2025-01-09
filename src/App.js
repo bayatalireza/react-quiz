@@ -7,7 +7,7 @@ import Loader from "./components/Loader";
 import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
 import Questions from "./components/Questions";
-import NextAnswer from "./components/NextAnswer";
+import NextAnswer from "./components/NextQuestion";
 
 
 const initialState = {
@@ -27,7 +27,7 @@ function reducer(state, action) {
         return {...state, status: "active"}
       case "newAnswer":
         return {...state, answer: action.payload, points: state.questions.correctOption === action.payload ? state.points + state.questions.points : state.points}
-      case "nextAnswer":
+      case "nextQuestion":
         return {...state, index: state.index + 1, answer: null}
     case "dataFailed":
       return { ...state, status: "error" };
